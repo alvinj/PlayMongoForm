@@ -1,4 +1,4 @@
-# A Play Framework "Mongo" Form
+## A Play Framework "Mongo" Form
 
 This project contains a large example Play Framework form.
 
