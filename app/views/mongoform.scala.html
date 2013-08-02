@@ -1,0 +1,60 @@
+@(mongoForm: Form[Mongo])
+
+@import helper._ 
+@import helper.twitterBootstrap._ 
+
+@main("Sample Form Widgets") {
+
+	@helper.form(action = routes.MongoController.save) {
+	
+	  @* "predefined helpers"  *@
+	  @* http://www.playframework.org/documentation/api/2.0/scala/views/html/helper/package.html *@
+
+    @* demonstrates a textfield, label, and placeholder text *@
+    @inputText(mongoForm("username"), '_label -> "First Name", 'placeholder -> "First Name")	
+
+    @inputText(mongoForm("middleInitial"), 
+               '_label -> "Middle Initial",
+               '_help -> "Enter your middle initial (not required)")
+
+    @* email and number fields *@
+    @inputText(mongoForm("email"), '_label -> "Email")
+    @inputText(mongoForm("number"), '_label -> "Number")
+    @inputText(mongoForm("longNumber"), '_label -> "Long Number")
+    @inputText(mongoForm("optionalNumber"), '_label -> "Optional Number")
+
+    @* checkbox *@
+    @checkbox(mongoForm("readEula"), '_label -> "Confirm:", '_text -> "Sure, I read the EULA")
+
+    @* date *@
+    @inputDate(mongoForm("date"), '_label -> "Date") 
+
+    @* password *@
+    @inputPassword(mongoForm("password"), '_label -> "Password")
+    
+    @* select/option field *@
+    @select(mongoForm("yesNoSelect"), options("yes"->"Yes", "no"->"No"), '_label -> "Yes or No:")
+    
+    @* radio buttons *@
+    @inputRadioGroup(mongoForm("yesNoRadio"), options("yes"->"Yes", "no"->"No"), '_label -> "Yes/No:")
+    
+    @* request user enter multiple words *@
+    @helper.repeat(mongoForm("stocks"), min = 2) { stockField => 
+      @inputText(stockField, '_label -> "Stocks")
+    }
+
+    @textarea(mongoForm("notes"))
+
+    @* 'ignored' field (static content) *@
+    @inputText(mongoForm("ignored"), '_label -> "Ignored")
+
+    <div class="form-actions actions">
+      <input type="submit" class="btn btn-primary" value="Save">
+      <a href="@routes.Application.index" class="btn">Cancel</a>
+    </div>
+
+  }
+
+
+}
+
